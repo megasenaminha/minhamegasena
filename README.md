@@ -25,7 +25,7 @@
 
   - O novo jogo é incorporado ao grupo 6 e altera a posição dos números dos jogos anteriores.
 
-  - Por exemplo:
+  - Por exemplo:<br>
     jogo x - 05 16 38 42 43 48 <br>
     jogo y - 01 02 10 32 34 59 <br>
     jogo z - 09 30 34 45 54 55 - novo jogo<br>
