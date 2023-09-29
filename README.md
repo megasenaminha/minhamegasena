@@ -34,7 +34,7 @@
 
 ## Lista de Jogos
 
-- De posse desses grupos(frequência e atraso) o usuário da aplicação vai poder **_escolher as letras do grupo de frequência_ para realizar um jogo e obter _todas as combinações possíveis_**:
+- De posse desses grupos(frequência e atraso) o usuário da aplicação vai poder **_escolher as letras do grupo de frequência_ para realizar um jogo e obter _todas as combinações possíveis_**.<br>
   Ex.: B B C D E J
 
 - Depois disso com base no grupo de atraso o usuário pode **aplicar filtros** que podem ser por **números**(_excluindo todos os jogos que contém algum número específico_) ou por **grupo**(_atraso_).
