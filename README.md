@@ -1,4 +1,4 @@
-# megaSenaLeonidio
+# MEGA SENA - LEONÍDIO
 
 Projeto destinado a estudar os números da Mega Sena.
 
