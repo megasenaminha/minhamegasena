@@ -1,7 +1,5 @@
 # MEGA SENA - LEONÍDIO
 
-Projeto destinado a estudar os números da Mega Sena.
-
 # Objetivos:
 
 - Desenvolver uma aplicação WEB com login único com base nos estudos desenvolvidos pelo cliente.
