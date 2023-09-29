@@ -30,7 +30,7 @@
     jogo y - 01 02 10 32 34 59 <br>
     jogo z - 09 30 34 45 54 55 - novo jogo<br>
 
-  - Os jogos **x** e **y** estavam no **grupo 6**. Com o sorteiro do jogo **z**, ele acaba retirando o jogo **y** do **grupo 6** enviando-o para o **grupo 5**, pois o número **'34'** foi sorteado no jogo **z**.
+  - Os jogos **x** e **y** estavam no **grupo 6**. Com o sorteio do jogo **z**, ele acaba retirando o jogo **y** do **grupo 6** enviando-o para o **grupo 5**, pois o número **'34'** foi sorteado no jogo **z**.
 
 ## Lista de Jogos
 
