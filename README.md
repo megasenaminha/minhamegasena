@@ -8,7 +8,7 @@
 
 ---
 
-# Funconalidades:
+# Funcinalidades:
 
 ## Todos os Jogos
 
@@ -17,7 +17,7 @@
 
 ## Grupo Frequência
 
-- Identificar a frequência que cada número é sorteado e dividí-los em **10 grupos** de **'A'** até **'J'**(entre 5 a 7 números em cada grupo).
+- Identificar a frequência que cada número é sorteado e dividi-los em **10 grupos** de **'A'** até **'J'**(entre 5 a 7 números em cada grupo).
 
 ## Grupo Atraso
 
