@@ -140,7 +140,7 @@ for (const numero of numerosOrdenados) {
 	for (let i = "A".charCodeAt(0); i <= grupoAtual.charCodeAt(0); i++) {
 		const grupoAnterior = String.fromCharCode(i);
 		if (
-			grupos[grupoAnterior].length < 7 &&
+			grupos[grupoAnterior].length < 6 &&
 			frequencia === frequenciaNumeros[grupos[grupoAnterior][0]]
 		) {
 			grupos[grupoAnterior].push(Number(numero));
@@ -155,7 +155,7 @@ for (const numero of numerosOrdenados) {
 	}
 
 	// Avance para o próximo grupo, se necessário
-	if (grupos[grupoAtual].length === 7) {
+	if (grupos[grupoAtual].length === 6) {
 		grupoAtual = String.fromCharCode(grupoAtual.charCodeAt(0) + 1);
 	}
 }
