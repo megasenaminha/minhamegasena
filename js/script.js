@@ -38,6 +38,7 @@ async function buscarResultadosMegaSena() {
 		console.error("Erro na solicitação:", erro);
 	}
 }
+buscarResultadosMegaSena();
 
 // function calcularFrequenciaNumeros(dados) {
 // 	const todasDezenas = [];
