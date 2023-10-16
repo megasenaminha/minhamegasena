@@ -22,6 +22,8 @@
 
 // buscarDadosMegaSena();
 
+//
+
 async function buscarResultadosMegaSena() {
 	try {
 		const resposta = await fetch(
@@ -30,17 +32,26 @@ async function buscarResultadosMegaSena() {
 
 		if (resposta.status === 200) {
 			const dados = await resposta.json();
-			return dados;
+			return dados.map((item) => {
+				return { concurso: item.concurso, dezenas: item.dezenas };
+			});
 		} else {
 			console.error("Falha ao buscar resultados da Mega Sena.");
+			return null;
 		}
 	} catch (erro) {
 		console.error("Erro na solicitação:", erro);
+		return null;
 	}
 }
 
 buscarResultadosMegaSena().then((dados) => {
 	console.log(dados);
+	const allGames = document.getElementById("allGames");
+	const content = dados
+		.map((dado) => `<p>Jogo ${dado.concurso}: ${dado.dezenas.join(", ")}</p>`)
+		.join("");
+	allGames.innerHTML = content;
 });
 
 // function calcularFrequenciaNumeros(dados) {
