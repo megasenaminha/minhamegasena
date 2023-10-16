@@ -1,29 +1,3 @@
-// let dadosDaMegaSena;
-
-// async function buscarDadosMegaSena() {
-// 	try {
-// 		const resposta = await fetch(
-// 			"https://loteriascaixa-api.herokuapp.com/api/megasena"
-// 		);
-
-// 		dadosDaMegaSena = await resposta.json();
-
-// 		console.log(dadosDaMegaSena);
-// 	} catch (erro) {
-// 		console.error(erro);
-// 	}
-// }
-
-// function usarDados() {
-// 	if (dadosDaMegaSena) {
-// 		console.log(dadosDaMegaSena);
-// 	}
-// }
-
-// buscarDadosMegaSena();
-
-//
-
 async function buscarResultadosMegaSena() {
 	try {
 		const resposta = await fetch(
@@ -47,13 +21,15 @@ async function buscarResultadosMegaSena() {
 
 buscarResultadosMegaSena().then((dados) => {
 	console.log(dados);
-	const allGames = document.getElementById("allGames");
-	const content = dados
-		.map((dado) => `<p>Jogo ${dado.concurso}: ${dado.dezenas.join(", ")}</p>`)
-		.join("");
-	allGames.innerHTML = content;
+	// exibe todos os jogos na tela
+	// const allGames = document.getElementById("allGames");
+	// const content = dados
+	// 	.map((dado) => `<p>Jogo ${dado.concurso}: ${dado.dezenas.join(", ")}</p>`)
+	// 	.join("");
+	// allGames.innerHTML = content;
 });
 
+// // Calcula a frequência dos números
 // function calcularFrequenciaNumeros(dados) {
 // 	const todasDezenas = [];
 
