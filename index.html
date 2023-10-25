@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js\script.js" defer></script>
-    <link rel="stylesheet" href="css\style.css">
-    <title>Document</title>
+    <title>login</title>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
+    <script>
+        function handleCredentialResponse(response) {
+          const data = jwt_decode(response.credential)
+          console.log(data)
+        }
+        window.onload = function () {
+          google.accounts.id.initialize({
+            client_id: "73529281226-t975q38q3hl25fj3n37pm19q5eih952q.apps.googleusercontent.com",
+            callback: handleCredentialResponse
+          });
+          google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large", type:"standard", text:"continue_with", logo_alignment:"left", shape:"pill"}  // customization attributes
+          );
+          google.accounts.id.prompt(); // also display the One Tap dialog
+        }
+      </script>
 </head>
 <body>
-    <header>
-        <h1>Estudos da Mega Sena</h1>
-    </header>
-    <main>
-        <section class="container">
-            <div class="content">Grupo Frequencia</div>
-        </section>
-        <section class="container">
-            <div class="content">Grupo Atraso</div>
-        </section>
-        <section class="container">
-            <div class="content">Formação de Jogos</div>
-        </section>
-    </main>
-    <section>
-        <div id="allGames"></div>
-    </section>
-    
-    
-    
+ 
+    <div id="buttonDiv"></div>
+
 </body>
 </html>
