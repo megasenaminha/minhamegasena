@@ -26,6 +26,24 @@ async function buscarResultadosMegaSena() {
 
 buscarResultadosMegaSena();
 
+async function obterDezenasMegaSena() {
+	if (dezenasMegaSena === undefined) {
+		await buscarResultadosMegaSena();
+	}
+	return dezenasMegaSena;
+}
+
+async function TodosOsJogos() {
+	const dezenas = await obterDezenasMegaSena();
+	if (dezenas) {
+		console.log("Dezenas da Mega Sena:", dezenasMegaSena);
+	} else {
+		console.log("Não foi possível obter os resultados da Mega Sena.");
+	}
+}
+
+TodosOsJogos();
+
 // async function frequenciaNumeros() {
 // 	await buscarResultadosMegaSena();
 
