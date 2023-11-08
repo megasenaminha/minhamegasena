@@ -3,7 +3,7 @@
 /* Cores e fontes do projeto */
 
 :root {
-    --color-one: #0d4276; 
+    --color-one: #0065b7; 
     --color-two: #7cba3b;
     --color-background-one: #FFFFFF; 
     --color-background-two: rgb(238, 238, 238); 
@@ -57,10 +57,23 @@ body{
     height: 100%;
     max-width: 100vw;
     overflow-x: hidden;
+    background-color: var(--color-background-one);
 }
 
 header{
-    text-align: center;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background-color: var(--color-one);
+    /* box-shadow: 0px 14px 14px -1px rgba(111,114,173,0.53);
+    -webkit-box-shadow: 0px 14px 14px -1px rgba(111,114,173,0.53);
+    -moz-box-shadow: 0px 14px 14px -1px rgba(111,114,173,0.53); */
+    color: var(--color-background-one);
+    text-transform: uppercase;
+
 }
 
 main{
@@ -74,8 +87,19 @@ main{
 .container{
     width: 100%;
     height: 90vh;
-    border: 1px solid black;
+    border: 1px solid var(--color-one);
     
+}
+
+.content{
+    color: var(--color-text);
+    font-weight: 700;
+    margin: 10px;
+}
+
+main>section>div>h2{
+    color: var(--color-one);
+    text-align: center;
 }
 
 @media screen and (max-width: 601px) {
