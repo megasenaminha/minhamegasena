@@ -36,7 +36,7 @@ async function TodosOsJogos() {
 	console.log("Todos os Jogos:", dezenasMegaSena);
 }
 
-// TodosOsJogos();
+TodosOsJogos();
 
 
 function grupoFrequencia(arrays) {
@@ -98,7 +98,7 @@ async function obtemGrupoFrequencia() {
 	return resultado
 }
 
-// obtemGrupoFrequencia()
+obtemGrupoFrequencia()
 
 
 function ListaDeJogos(selectedArrays, selectedLetters) {
