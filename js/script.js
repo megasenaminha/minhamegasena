@@ -24,8 +24,6 @@ async function buscarResultadosMegaSena() {
 	}
 }
 
-buscarResultadosMegaSena();
-
 async function obterDezenasMegaSena() {
 	if (dezenasMegaSena === undefined) {
 		await buscarResultadosMegaSena();
@@ -35,84 +33,112 @@ async function obterDezenasMegaSena() {
 
 async function TodosOsJogos() {
 	const dezenas = await obterDezenasMegaSena();
-	if (dezenas) {
-		console.log("Dezenas da Mega Sena:", dezenasMegaSena);
-	} else {
-		console.log("Não foi possível obter os resultados da Mega Sena.");
-	}
+	console.log("Todos os Jogos:", dezenasMegaSena);
 }
 
-TodosOsJogos();
+// TodosOsJogos();
 
-// async function frequenciaNumeros() {
-// 	await buscarResultadosMegaSena();
 
-// 	// Verifica se dezenasMegaSena foi definido corretamente
-// 	if (dezenasMegaSena) {
-// 		// Inicializa um objeto para armazenar a frequência dos números
-// 		frequencia = {};
+function grupoFrequencia(arrays) {
+	const ocorrencias = Array(60).fill(0);
+  
+	for (const array of arrays) {
+	  for (const numeroStr of array) {
+		const numero = parseInt(numeroStr, 10);
+		if (!isNaN(numero) && numero >= 1 && numero <= 60) {
+		  ocorrencias[numero - 1]++;
+		}
+	  }
+	}
+  
+	const resultado = ocorrencias.map((quantidade, index) => ({
+	  numero: index + 1,
+	  quantidade,
+	}));
+  
+	resultado.sort((a, b) => b.quantidade - a.quantidade);
+  
+	const top10Numeros = resultado.slice(0, 60).map(item => item.numero);
+  
+	const top10Arrays = [];
+	let currentArray = [];
+  
+	for (let i = 0; i < 61; i++) {
+	  if (currentArray.length < 6) {
+		const num = top10Numeros[i];
+		currentArray.push(num);
+		ocorrencias[num - 1]--;
+	  } else {
+		top10Arrays.push(currentArray);
+		currentArray = [];
+		i--;
+	  }
+	}
+  
+	// Adicionar os arrays restantes
+	for (let i = 0; i < top10Arrays.length; i++) {
+	  while (top10Arrays[i].length < 6) {
+		for (let j = 0; j < ocorrencias.length; j++) {
+		  if (ocorrencias[j] > 0) {
+			top10Arrays[i].push(j + 1);
+			ocorrencias[j]--;
+		  }
+		}
+	  }
+	}
+  
+	return top10Arrays;
+}
 
-// 		// Itera sobre cada conjunto de dezenas
-// 		dezenasMegaSena.forEach((conjunto) => {
-// 			conjunto.forEach((numero) => {
-// 				frequencia[numero] = (frequencia[numero] || 0) + 1;
-// 			});
-// 		});
 
-// 		if (Object.keys(frequencia).length !== 0) {
-// 			const chavesOrdenadas = Object.keys(frequencia).sort(
-// 				(a, b) => frequencia[b] - frequencia[a]
-// 			);
-// 			console.log(chavesOrdenadas);
-// 			return chavesOrdenadas;
-// 		} else {
-// 			console.log("O objeto de frequência está vazio.");
-// 			return null;
-// 		}
-// 	} else {
-// 		console.log("Não foi possível obter os números ordenados.");
-// 		return null;
-// 	}
-// }
+async function obtemGrupoFrequencia() {
+	const dezenas = await obterDezenasMegaSena();
+	const resultado = grupoFrequencia(dezenas);
+	console.log("Grupo Frequencia:",resultado);
+	return resultado
+}
 
-// async function criarGrupos() {
-// 	const chavesOrdenadas = await frequenciaNumeros();
-// 	if (chavesOrdenadas) {
-// 		// Lógica para dividir os números em 10 grupos, do grupoA até o grupoJ
-// 		const numGrupos = 10;
-// 		const elementosPorGrupo = Math.ceil(chavesOrdenadas.length / numGrupos);
+// obtemGrupoFrequencia()
 
-// 		for (let i = 0; i < numGrupos; i++) {
-// 			const grupo = chavesOrdenadas.slice(
-// 				i * elementosPorGrupo,
-// 				(i + 1) * elementosPorGrupo
-// 			);
-// 			const grupoComFrequencia = grupo.map((numero) => {
-// 				return { numero: numero, frequencia: frequencia[numero] };
-// 			});
-// 			grupos["grupo" + String.fromCharCode(65 + i)] = grupoComFrequencia;
-// 		}
-// 		console.log(grupos);
-// 	} else {
-// 		console.log("Não foi possível criar os grupos.");
-// 	}
-// 	let groupHTML = "";
 
-// 	// percorrendo os grupos e formatando o HTML
-// 	for (let key in grupos) {
-// 		groupHTML += `<div><h3>${key}</h3><ul style="display: flex; list-style-type: none;">`;
-// 		grupos[key].forEach((item, index) => {
-// 			if (index > 0) {
-// 				groupHTML += ", ";
-// 			}
-// 			groupHTML += `${item.numero} (${item.frequencia})`;
-// 		});
-// 		groupHTML += "</ul></div>";
-// 	}
+function ListaDeJogos(selectedArrays, selectedLetters) {
+	const combinations = [];
+	const selectedIndices = selectedLetters.map(letter => letter.charCodeAt(0) - 'a'.charCodeAt(0));
+  
+	function generateUniqueCombinations(currentCombination, currentIndex) {
+	  if (combinations.length >= 10) {
+		return; // Limitar a 10 combinações
+	  }
+  
+	  if (currentCombination.length === 6) {
+		combinations.push([...currentCombination]);
+		return;
+	  }
+  
+	  for (let i = currentIndex; i < selectedArrays.length; i++) {
+		const currentArray = selectedArrays[i];
+		for (const number of currentArray) {
+		  if (!currentCombination.includes(number)) {
+			currentCombination.push(number);
+			generateUniqueCombinations(currentCombination, i);
+			currentCombination.pop();
+		  }
+		}
+	  }
+	}
+  
+	generateUniqueCombinations([], 0);
+  
+	return combinations;
+  }
 
-// 	// definindo o conteúdo da div com o HTML formatado
-// 	const div = document.getElementById("frequenceGroup");
-// 	div.innerHTML = groupHTML;
-// }
 
-// criarGrupos();
+async function obtemListaDeJogos() {
+	const dezenas = await obterDezenasMegaSena();
+	const grupoFrequencias = grupoFrequencia(dezenas);
+	const resultado = ListaDeJogos(grupoFrequencias, ['a', 'b']);
+	console.log("ListaDeJogos:",resultado);
+	return resultado
+}
+
+obtemListaDeJogos()
