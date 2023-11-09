@@ -101,42 +101,34 @@ async function obtemGrupoFrequencia() {
 obtemGrupoFrequencia()
 
 
-function ListaDeJogos(selectedArrays, selectedLetters) {
-	const combinations = [];
-	const selectedIndices = selectedLetters.map(letter => letter.charCodeAt(0) - 'a'.charCodeAt(0));
-  
-	function generateUniqueCombinations(currentCombination, currentIndex) {
-	  if (combinations.length >= 10) {
-		return; // Limitar a 10 combinações
-	  }
-  
-	  if (currentCombination.length === 6) {
-		combinations.push([...currentCombination]);
-		return;
-	  }
-  
-	  for (let i = currentIndex; i < selectedArrays.length; i++) {
-		const currentArray = selectedArrays[i];
-		for (const number of currentArray) {
-		  if (!currentCombination.includes(number)) {
-			currentCombination.push(number);
-			generateUniqueCombinations(currentCombination, i);
-			currentCombination.pop();
-		  }
-		}
-	  }
+function ListaDeJogos(matrizDeDezenas, letrasSelecionadas) {
+	// Verifica se a matriz e as letras foram fornecidas
+	if (!matrizDeDezenas || !letrasSelecionadas || letrasSelecionadas.length === 0) {
+	  return [];
 	}
   
-	generateUniqueCombinations([], 0);
+	// Mapeia as letras para índices de matriz (a: 0, b: 1, ..., j: 9)
+	const indices = letrasSelecionadas.map(letra => letra.charCodeAt(0) - 'a'.charCodeAt(0));
   
-	return combinations;
+	// Filtra e concatena as dezenas correspondentes aos índices mapeados
+	const dezenasSelecionadas = indices.reduce((dezenas, indice) => {
+	  if (matrizDeDezenas[indice]) {
+		return dezenas.concat(matrizDeDezenas[indice]);
+	  }
+	  return dezenas;
+	}, []);
+  
+	// Remove duplicatas e ordena as dezenas
+	const dezenasUnicasOrdenadas = [...new Set(dezenasSelecionadas)].sort((a, b) => a - b);
+  
+	return dezenasUnicasOrdenadas;
   }
 
 
 async function obtemListaDeJogos() {
 	const dezenas = await obterDezenasMegaSena();
 	const grupoFrequencias = grupoFrequencia(dezenas);
-	const resultado = ListaDeJogos(grupoFrequencias, ['a', 'b']);
+	const resultado = ListaDeJogos(grupoFrequencias, ['a','b']);
 	console.log("ListaDeJogos:",resultado);
 	return resultado
 }
