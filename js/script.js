@@ -38,99 +38,134 @@ async function TodosOsJogos() {
 
 TodosOsJogos();
 
-
 function grupoFrequencia(arrays) {
 	const ocorrencias = Array(60).fill(0);
-  
+
 	for (const array of arrays) {
-	  for (const numeroStr of array) {
-		const numero = parseInt(numeroStr, 10);
-		if (!isNaN(numero) && numero >= 1 && numero <= 60) {
-		  ocorrencias[numero - 1]++;
+		for (const numeroStr of array) {
+			const numero = parseInt(numeroStr, 10);
+			if (!isNaN(numero) && numero >= 1 && numero <= 60) {
+				ocorrencias[numero - 1]++;
+			}
 		}
-	  }
 	}
-  
+
 	const resultado = ocorrencias.map((quantidade, index) => ({
-	  numero: index + 1,
-	  quantidade,
+		numero: index + 1,
+		quantidade,
 	}));
-  
+
 	resultado.sort((a, b) => b.quantidade - a.quantidade);
-  
-	const top10Numeros = resultado.slice(0, 60).map(item => item.numero);
-  
+
+	const top10Numeros = resultado.slice(0, 60).map((item) => item.numero);
+
 	const top10Arrays = [];
 	let currentArray = [];
-  
+
 	for (let i = 0; i < 61; i++) {
-	  if (currentArray.length < 6) {
-		const num = top10Numeros[i];
-		currentArray.push(num);
-		ocorrencias[num - 1]--;
-	  } else {
-		top10Arrays.push(currentArray);
-		currentArray = [];
-		i--;
-	  }
+		if (currentArray.length < 6) {
+			const num = top10Numeros[i];
+			currentArray.push(num);
+			ocorrencias[num - 1]--;
+		} else {
+			top10Arrays.push(currentArray);
+			currentArray = [];
+			i--;
+		}
 	}
-  
+
 	// Adicionar os arrays restantes
 	for (let i = 0; i < top10Arrays.length; i++) {
-	  while (top10Arrays[i].length < 6) {
-		for (let j = 0; j < ocorrencias.length; j++) {
-		  if (ocorrencias[j] > 0) {
-			top10Arrays[i].push(j + 1);
-			ocorrencias[j]--;
-		  }
+		while (top10Arrays[i].length < 6) {
+			for (let j = 0; j < ocorrencias.length; j++) {
+				if (ocorrencias[j] > 0) {
+					top10Arrays[i].push(j + 1);
+					ocorrencias[j]--;
+				}
+			}
 		}
-	  }
 	}
-  
+
 	return top10Arrays;
 }
-
 
 async function obtemGrupoFrequencia() {
 	const dezenas = await obterDezenasMegaSena();
 	const resultado = grupoFrequencia(dezenas);
-	console.log("Grupo Frequencia:",resultado);
-	return resultado
+	console.log("Grupo Frequencia:", resultado);
+
+	// Formatando o resultado para exibição
+	const resultadoFormatado = formatarResultado(resultado);
+
+	// Enviando grupo frequência para o Front-End
+	const enviarGrupoFrequencia = document.getElementById("frequenceGroup");
+	enviarGrupoFrequencia.innerHTML = resultadoFormatado;
+
+	return resultado;
 }
 
-obtemGrupoFrequencia()
+// Função para formatar o resultado para exibição no HTML
+function formatarResultado(resultado) {
+	// Criar uma tabela
+	const table = document.createElement("table");
 
+	// Adicionar linhas da tabela
+	resultado.forEach((grupo, indice) => {
+		const row = table.insertRow();
+
+		// Adicionar a primeira célula com a letra/nome do grupo
+		const letraCell = row.insertCell();
+		letraCell.textContent = String.fromCharCode(65 + indice) + "=";
+
+		// Adicionar as células com os números do grupo
+		for (let i = 0; i < grupo.length; i++) {
+			const cell = row.insertCell();
+			cell.textContent = grupo[i];
+		}
+	});
+
+	return table.outerHTML;
+}
+
+obtemGrupoFrequencia();
 
 function ListaDeJogos(matrizDeDezenas, letrasSelecionadas) {
 	// Verifica se a matriz e as letras foram fornecidas
-	if (!matrizDeDezenas || !letrasSelecionadas || letrasSelecionadas.length === 0) {
-	  return [];
+	if (
+		!matrizDeDezenas ||
+		!letrasSelecionadas ||
+		letrasSelecionadas.length === 0
+	) {
+		return [];
 	}
-  
+
 	// Mapeia as letras para índices de matriz (a: 0, b: 1, ..., j: 9)
-	const indices = letrasSelecionadas.map(letra => letra.charCodeAt(0) - 'a'.charCodeAt(0));
-  
+	const indices = letrasSelecionadas.map(
+		(letra) => letra.charCodeAt(0) - "a".charCodeAt(0)
+	);
+
 	// Filtra e concatena as dezenas correspondentes aos índices mapeados
 	const dezenasSelecionadas = indices.reduce((dezenas, indice) => {
-	  if (matrizDeDezenas[indice]) {
-		return dezenas.concat(matrizDeDezenas[indice]);
-	  }
-	  return dezenas;
+		if (matrizDeDezenas[indice]) {
+			return dezenas.concat(matrizDeDezenas[indice]);
+		}
+		return dezenas;
 	}, []);
-  
-	// Remove duplicatas e ordena as dezenas
-	const dezenasUnicasOrdenadas = [...new Set(dezenasSelecionadas)].sort((a, b) => a - b);
-  
-	return dezenasUnicasOrdenadas;
-  }
 
+	// Remove duplicatas e ordena as dezenas
+	const dezenasUnicasOrdenadas = [...new Set(dezenasSelecionadas)].sort(
+		(a, b) => a - b
+	);
+
+	return dezenasUnicasOrdenadas;
+}
 
 async function obtemListaDeJogos() {
 	const dezenas = await obterDezenasMegaSena();
 	const grupoFrequencias = grupoFrequencia(dezenas);
-	const resultado = ListaDeJogos(grupoFrequencias, ['a','b']);
-	console.log("ListaDeJogos:",resultado);
-	return resultado
+	const resultado = ListaDeJogos(grupoFrequencias, ["a", "b"]);
+	console.log("ListaDeJogos:", resultado);
+	return resultado;
 }
 
-obtemListaDeJogos()
+obtemListaDeJogos();
