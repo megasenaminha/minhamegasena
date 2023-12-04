@@ -1,0 +1,23 @@
+{
+  "name": "minhamegasena",
+  "version": "1.0.0",
+  "description": "---",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/megasenaminha/minhamegasena.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/megasenaminha/minhamegasena/issues"
+  },
+  "homepage": "https://github.com/megasenaminha/minhamegasena#readme",
+  "dependencies": {
+    "papaparse": "^5.4.1"
+  }
+}

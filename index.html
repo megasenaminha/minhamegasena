@@ -1,54 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="js\script.js" defer></script>
-    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="css\style.css" />
     <title>Estudos Mega Sena</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Estudos da Mega Sena</h1>
+      <h1>Estudos da Mega Sena</h1>
     </header>
     <main>
-        <section class="container">
-            <div class="content">
-                <h2>Grupo Frequencia</h2>
-                <div id="frequenceGroup">
-                    <!-- conteúdo -->
-                    
-                </div>
-            </div>
-        </section>
-        <section class="container">
-            <div class="content">
-                <h2>Grupo Atraso</h2>
-                <!-- conteúdo -->
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos debitis maxime vero dolores ab, vel ipsam praesentium numquam repellendus, beatae odit assumenda tempore cumque? Nulla dolorum iure optio eum sit.</p>
-            </div>
-        </section>
-        <section class="container">
-            <div class="content">
-                <h2>Formação de Jogos</h2>
-                <!-- conteúdo -->
-                <form class="setGames">
-                    <input type="text" name="firstNumber" id="firtNumber" maxlength="1" oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')" required>
-                    <input type="text" name="secondNumber" id="secondNumber" maxlength="1" oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')" required>
-                    <input type="text" name="thirdNumber" id="thirdNumber"  maxlength="1" oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')" required>
-                    <input type="text" name="fourthumber" id="fourthumber"  maxlength="1" oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')" required>
-                    <input type="text" name="fifthNumber" id="fifthNumber"  maxlength="1" oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')" required>
-                    <input type="text" name="sixthNumber" id="sixthNumber"  maxlength="1" oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')" required>
-                </form>
-                <button class="btn">Enviar</button>
-            </div>
-        </section>
+      <section class="container">
+        <div class="content">
+          <h2>Grupo Frequencia</h2>
+          <div id="frequenceGroup">
+            <!-- conteúdo -->
+          </div>
+        </div>
+      </section>
+      <section class="container">
+        <div class="content">
+          <h2>Grupo Atraso</h2>
+          <!-- conteúdo -->
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos
+            debitis maxime vero dolores ab, vel ipsam praesentium numquam
+            repellendus, beatae odit assumenda tempore cumque? Nulla dolorum
+            iure optio eum sit.
+          </p>
+        </div>
+      </section>
+      <section class="container">
+        <div class="content">
+          <h2>Formação de Jogos</h2>
+          <!-- conteúdo -->
+          <form class="setGames">
+            <input
+              type="text"
+              name="firstNumber"
+              id="firtNumber"
+              maxlength="1"
+              oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')"
+              required />
+            <input
+              type="text"
+              name="secondNumber"
+              id="secondNumber"
+              maxlength="1"
+              oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')"
+              required />
+            <input
+              type="text"
+              name="thirdNumber"
+              id="thirdNumber"
+              maxlength="1"
+              oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')"
+              required />
+            <input
+              type="text"
+              name="fourthumber"
+              id="fourthumber"
+              maxlength="1"
+              oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')"
+              required />
+            <input
+              type="text"
+              name="fifthNumber"
+              id="fifthNumber"
+              maxlength="1"
+              oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')"
+              required />
+            <input
+              type="text"
+              name="sixthNumber"
+              id="sixthNumber"
+              maxlength="1"
+              oninput="this.value = this.value.replace(/[^A-Ja-j]/g, '')"
+              required />
+          </form>
+          <button class="btn">Enviar</button>
+        </div>
+      </section>
     </main>
     <section>
-        <div id="allGames"></div>
+      <div id="allGames"></div>
     </section>
-    
-    
-    
-</body>
+  </body>
 </html>
